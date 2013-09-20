@@ -11,7 +11,10 @@ def find_nRound(row):
     while val>dst:
         n += 1
         val *= cont
-    return n+1
+    if n == 0:
+        return 0
+    else:
+        return n+1
 
 def shapen_n(img):
     
