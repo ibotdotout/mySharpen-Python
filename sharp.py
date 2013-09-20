@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import sys
 
 def sharpen(img):
     tmp = cv2.GaussianBlur(img,(5,5),5)
@@ -20,14 +21,26 @@ def hist(img):
     h=np.flipud(h)
     return h
 
-img = cv2.imread("lena.jpg")
+filename = "lena.jpg"
+if len(sys.argv) >= 2:
+    filename = sys.argv[1]
+
+img = cv2.imread(filename)
+row , col , chan = img.shape
+if row > 512:
+    while row > 512 :
+        img = cv2.resize(img, (0,0), fx=2/3.0, fy=2/3.0) 
+        row , col , chan = img.shape
+        sharped = sharpen(img)
+else:
+    sharped = sharpen(img)
+       
 #h1 = hist(img)
-cv2.imshow("Original",img)
 #cv2.imshow("hist1",h1)
 
-sharped = sharpen(img)
 h2 = hist(sharped)
 cv2.imshow("Sharped",sharped)
+cv2.imshow("Original",img)
 cv2.imshow("hist2",h2)
 
 cv2.waitKey()
