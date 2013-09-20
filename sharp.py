@@ -35,13 +35,15 @@ if row > 512:
 else:
     sharped = sharpen(img)
        
-#h1 = hist(img)
-#cv2.imshow("hist1",h1)
 
 h2 = hist(sharped)
+
 cv2.imshow("Sharped",sharped)
-cv2.imshow("Original",img)
 cv2.imshow("hist2",h2)
+
+cv2.imshow("Original",img)
+h1 = hist(img)
+cv2.imshow("hist1",h1)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
